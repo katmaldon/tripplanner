@@ -1,6 +1,14 @@
 class TripController < AppController 
   
   get "/home" do
+    if logged_in? && current_user
+      @user = current_user
+      session[:user_id] = @user.id
+      @trips = @user.trips
+      erb :home
+    else 
+      redirect '/login'
+    end 
   end
   
   get "/trips/new" do 

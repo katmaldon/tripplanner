@@ -43,7 +43,7 @@ class TripController < AppController
     end 
   end 
   
-  def delete "trips/:id" do 
+  delete 'trips/:id' do 
     @trips = Trip.find_by(params[:id])
     if current_user = @trips.user
       @trips.destroy

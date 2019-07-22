@@ -16,6 +16,15 @@ class TripController < AppController
   end 
   
   post '/trips/new' do 
+    @user = current_user 
+    if logged_in? && params[:name] != "" && params[:destination] != "" && params[:date] != ""
+      @trip = Trip.create(name: params[:name], destination: params[:destination], date: params[:date])
+      @user.trips << @trips 
+      redirect "/trips/#{@trip.id}"
+    else 
+      flash[:error] = "Please complete form."
+      redirect '/trips/new'
+    end 
   end 
   
   get 'trips/:id' do

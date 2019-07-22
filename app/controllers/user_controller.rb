@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UserController < AppController
 
   register Sinatra::Flash
   require 'sinatra/flash'

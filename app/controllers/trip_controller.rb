@@ -7,7 +7,7 @@ class TripController < AppController
       @trips = @user.trips
       erb :home
     else 
-      redirect '/login'
+      redirect "/login"
     end 
   end
   
@@ -15,7 +15,7 @@ class TripController < AppController
     erb :'trips/new' 
   end 
   
-  post '/trips/new' do 
+  post "/trips/new" do 
     @user = current_user 
     if logged_in? && params[:name] != "" && params[:destination] != "" && params[:date] != ""
       @trip = Trip.create(name: params[:name], destination: params[:destination], date: params[:date])
@@ -23,17 +23,32 @@ class TripController < AppController
       redirect "/trips/#{@trip.id}"
     else 
       flash[:error] = "Please complete form."
-      redirect '/trips/new'
+      redirect "/trips/new"
     end 
   end 
   
-  get 'trips/:id' do
+  get "trips/:id" do
+    if logged_in?
+      @trips = Trip.find_by(params[:id])
+      erb :'/trips/show'
+    end
   end 
   
-  get 'trips/:id/edit' do 
+  get "trips/:id/edit" do 
+    if logged_in?
+      @trips = Trip.find_by(params[:id])
+      erb :'/trips/edit'
+    else 
+      redirect '/login'
+    end 
   end 
   
-  def delete 'trips/:id' do 
+  def delete "trips/:id" do 
+    @trips = Trip.find_by(params[:id])
+    if current_user = @trips.user
+      @trips.destroy
+      redirect "/home"
+    end 
   end 
   
 end 

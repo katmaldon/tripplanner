@@ -1,7 +1,21 @@
-# css styling
+<body>
+  <style>
+    body {background-color: yellow;}
+  </style>
+<% if @trips.user != current_user %>
+  <% redirect "/trips/#{@trips.id}" %>
+<%end%>
+<h1>Update trip</h1>
 
-# Edit an existing trip
+<form action="/trips/<%= @trips.id%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="PATCH">
 
-#trip id 
-#Edit date 
-#Edit location 
+  <label>Change the date</label>
+  <input type="text" name="date" value="<%=@trips.date%>">
+
+  <label>Change the destination</label>
+  <input type="text" name="destination" value="<%=@trips.destination%>">
+
+  <input type="submit" value="Submit">
+</form>
+</body>

@@ -7,8 +7,8 @@ class AppController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :session 
-    set :sessions_secret, "password_security"
+    enable :sessions 
+    set :session_secret, "password_security"
     register Sinatra::Flash
   end 
   
@@ -23,7 +23,7 @@ class AppController < Sinatra::Base
     end 
     
     def current_user 
-      User.find_by[:user_id]
+      User.find_by_id(session[:user_id])
     end 
     
   end 

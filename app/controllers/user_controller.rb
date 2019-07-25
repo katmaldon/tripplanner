@@ -12,7 +12,7 @@ class UserController < AppController
     user = User.new(:email => params[:email], :password => params[:password])
     if user.save 
       session[:user_id] = user.id 
-      redirect "/home"
+      redirect to "/home"
     else 
       flash[:error] = "Sign up failed. Please try again."
       redirect "/signup"

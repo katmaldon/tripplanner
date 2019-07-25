@@ -43,6 +43,19 @@ class TripController < AppController
     end 
   end 
   
+   patch '/trips/:id' do
+      if logged_in? && params[:destination] != "" && params[:date] != ""
+        @trips = Trip.find_by_id(params[:id])
+        @trips.destination = params[:destination]
+        @trips.date = params[:date]
+        @trips.save
+        redirect to "/trips/#{@trips.id}"
+      else
+        flash[:error] = "Please complete all fields"
+        redirect "/trips/#{@trips.id}"
+      end
+   end
+  
   delete 'trips/:id' do 
     @trips = Trip.find_by(params[:id])
     if current_user = @trips.user

@@ -1,1 +1,44 @@
 #add css header, welcome, login, etc
+
+<body>
+ <style>
+  body {background-color: white;}
+ </style>
+<h4><a href="/logout">Logout</a></h4>
+
+<br></br>
+  <style>
+    h4{text-align: right;}
+    h4:link {background-color: orange;}
+    a:visited {background-color: blue;}
+    a:hover {background-color: red;}
+    a:active {background-color: yellow;}
+  </style>
+
+<h1>TRIPPLANNER</h1>
+
+<style>
+  h1{font-family: "Arial";}
+  h1{color: black;
+  font-size: 4em;
+  padding: 20px;
+  border-style: double;
+  border-color: orange}
+  h1{text-align: center }
+</style>
+<br></br>
+
+<h2>Hello, <%= current_user.email %>!</h2>
+  <style>
+    h2{font-family: "Arial", sans-serif;}
+  </style>
+<h4><a href="/trips/new">New Trip</a></h4>
+<h3>Choose a trip</h3>
+<h3>Your trips:</h3>
+    <style>
+      h3{font-family: "Arial", sans-serif;font-size: 18px}
+    </style>
+<%@trips.each do |trip|%>
+  		<li><a href="/trips/<%=trip.id%>"><%=trip.name%></a></li>
+<%end%>
+</body>

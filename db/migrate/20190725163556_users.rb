@@ -5,6 +5,7 @@ class Users < ActiveRecord::Migration
       users.string :email 
       users.string :password 
       users.string :password_digest 
+      users.integer :user_id
     end 
   end
 

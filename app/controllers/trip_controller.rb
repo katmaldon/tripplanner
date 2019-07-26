@@ -31,14 +31,14 @@ class TripController < AppController
     end 
   end 
   
-  get "trips/:id" do
+  get "/trips/:id" do
     if logged_in?
       @trips = Trip.find_by_id(params[:id])
       erb :'/trips/list'
     end
   end 
   
-  get "trips/:id/edit" do 
+  get "/trips/:id/edit" do 
     if logged_in?
       @trips = Trip.find_by_id(params[:id])
       erb :'/trips/edit'
@@ -60,7 +60,7 @@ class TripController < AppController
       end
    end
   
-  delete 'trips/:id' do 
+  delete '/trips/:id' do 
     @trips = Trip.find(params[:id])
     if current_user = @trips.user
       @trips.destroy

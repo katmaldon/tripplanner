@@ -12,7 +12,7 @@ class TripController < AppController
   end
   
   get "/trips" do 
-    erb :'trips' 
+    erb :'trips/list' 
   end 
   
   get "/trips/new" do 
@@ -22,9 +22,9 @@ class TripController < AppController
   post '/trips' do 
     @user = current_user 
     if logged_in? && params[:name] != "" && params[:destination] != "" && params[:date] != ""
-      @trip = Trip.create(name: params[:name], destination: params[:destination], date: params[:date])
+      @trips = Trip.create(name: params[:name], destination: params[:destination], date: params[:date])
       @user.trips << @trips 
-      redirect "/trips/#{@trip.id}"
+      redirect "/trips/#{@trips.id}"
     else 
       flash[:error] = "Please complete form."
       redirect "/trips/new"

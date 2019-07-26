@@ -13,10 +13,10 @@
 
 ActiveRecord::Schema.define(version: 20190725163617) do
 
-  create_table "trip", force: :cascade do |t|
-    t.string "name"
-    t.string "destination"
-    t.string "user_id"
+  create_table "trips", force: :cascade do |t|
+    t.string  "name"
+    t.string  "destination"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -56,7 +56,7 @@ class TripController < AppController
         redirect to "/trips/#{@trips.id}"
       else
         flash[:error] = "Please complete all fields"
-        redirect "/trips/#{@trips.id}"
+        redirect "/trips/new"
       end
    end
   
